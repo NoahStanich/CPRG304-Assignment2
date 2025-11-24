@@ -1,68 +1,125 @@
-package utilities;
+package implementations;
 
-import java.util.ArrayList;
-import java.util.NoSuchElementException;
-
+import exceptions.EmptyQueueException;
+import utilities.Iterator;
 import utilities.QueueADT;
 
 
 public class MyQueue<E> implements QueueADT<E>  {
 	
-	private ArrayList<E> list;
-	
+	private MyArrayList<E> queue;
 	
 	public MyQueue() {
-		ArrayList<E> list = new ArrayList<E>();
-		clear();
-	}
-
-	@Override
-	public void clear() {
-		list.clear();
+		this.queue = new MyArrayList<E>();  
 	}
 	
 	@Override
-	public int size() {
-		return list.size();
-	}
-	
-	@Override
-	public boolean enqueue(E element) throws NullPointerException {
-		if (element != null) {
-			list.add(element);
-			return true;
-		}
+	public void enqueue(E element) throws NullPointerException {
+		if (element == null) throw new NullPointerException();
 		
-		throw new NullPointerException();
+		queue.add(element);		
 	}
 	
 	@Override
-	public boolean enqueueMany(ArrayList<E> arr) throws NullPointerException {
-		if (arr != null) {
-			Iterator iterator = list.iterator();
-			while(iterator.hasNext()){
-				list.add(iterator.next());
-			}
-			return true;
-		}
-		throw new NullPointerException();
+	public E dequeue() throws EmptyQueueException {
+		if(queue.size() == 0 ) throw new EmptyQueueException();
+		
+		return queue.remove(0);
 	}
 	
 	@Override
-	public E dequeue() {
-		E value = list.get(0);
-		list.remove(0);
-		return value;
+	public E peek() throws EmptyQueueException {
+		if(queue.size() == 0) throw new EmptyQueueException();
+		
+		return queue.get(0);
+	}
+	
+	@Override
+	public void dequeueAll() {
+		queue.clear();
 	}
 	
 	@Override
 	public boolean isEmpty() {
-		return list.isEmpty();
+		return queue.isEmpty();
 	}
 	
 	@Override
-	public E peek() {
-		return list.get(0);
+	public boolean contains(E toFind) throws NullPointerException {
+		if(toFind == null) throw new NullPointerException();
+		
+		return queue.contains(toFind);
+	}
+	
+	@Override
+	public int search(E toFind) {
+		
+		if( queue.contains(toFind)) {
+			Iterator<E> it = queue.iterator();
+			int index = 0;
+			
+			while(it.hasNext()) {
+				index++;
+				
+				if(it.next().equals(toFind)) {
+					return index;
+				}
+			}
+		}
+		
+		return -1;
+	}
+	
+	@Override
+	public Iterator<E> iterator() {
+		return queue.iterator();
+	}
+	
+	@Override
+	public boolean equals(QueueADT<E> that) {
+		if(queue.size() != that.size()) {
+			return false;
+		}
+		
+		boolean flag = true;
+		
+		Iterator<E> queue1 = queue.iterator();
+		Iterator<E> queue2 = that.iterator();
+		
+		while(queue1.hasNext()) {
+			E item1 = queue1.next();
+			E item2 = queue2.next();
+			
+			if(!item1.equals(item2)) {
+				flag = false;
+				break;
+			}
+		}
+		
+		return flag;
+	}
+		
+	@Override
+	public Object[] toArray() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public E[] toArray(E[] holder) throws NullPointerException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean isFull() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+	
+	@Override
+	public int size() {
+		return queue.size();
 	}
 	
 }
