@@ -3,7 +3,16 @@ package implementations;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
-public class MyStack<E> implements StackADT<E> {
+interface StackADT<E> {
+    void clear();
+    int depth();
+    boolean push(E element) throws NullPointerException;
+    E pop();
+    boolean isEmpty();
+    E peek();
+}
+
+public abstract class MyStack<E> implements StackADT<E> {
     
     private ArrayList<E> stackList;
     
@@ -32,10 +41,9 @@ public class MyStack<E> implements StackADT<E> {
         throw new NullPointerException();
     }
     
-    @Override
-    public boolean pushMany(ArrayList<T> arr) throws NullPointerException {
+    public boolean pushMany(ArrayList<E> arr) throws NullPointerException {
         if (arr != null) {
-            for (T element : arr) {
+            for (E element : arr) {
                 if (element == null) {
                     throw new NullPointerException();
                 }
