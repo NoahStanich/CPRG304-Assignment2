@@ -5,109 +5,129 @@ import utilities.StackADT;
 import java.util.EmptyStackException;
 
 public class MyStack<E> implements StackADT<E> {
-    private Object[] elements;
-    private int top;
-    private static final int DEFAULT_CAPACITY = 10;
+	private MyArrayList<E> stack; //= new MyArrayList<>();
 
-    public MyStack() {
-        elements = new Object[DEFAULT_CAPACITY];
-        top = -1;
-    }
+	public MyStack() {
+		stack = new MyArrayList<>();
+	}
+	@Override
+	public void push(E toAdd) throws NullPointerException {
+		if(toAdd == null ) throw new NullPointerException();
+		
+		stack.add(toAdd);
+	}
 
-    @Override
-    public void push(E toAdd) throws NullPointerException {
-        if (toAdd == null) {
-            throw new NullPointerException("Cannot add null element to the stack.");
-        }
-        if (top == elements.length - 1) {
-            resize();
-        }
-        elements[++top] = toAdd;
-    }
+	@Override
+	public E pop() throws EmptyStackException {
+		if(stack.size() == 0 ) throw new EmptyStackException();
+		return stack.remove(stack.size() - 1);
+	}
 
-    @Override
-    public E pop() throws EmptyStackException {
-        if (isEmpty()) {
-            throw new EmptyStackException();
-        }
-        E item = (E) elements[top];
-        elements[top--] = null; // Avoid memory leak
-        return item;
-    }
+	@Override
+	public E peek() throws EmptyStackException {
+		if(stack.size() == 0 ) throw new EmptyStackException();
+		
+		return stack.get(stack.size() - 1);
+	}
 
-    @Override
-    public E peek() throws EmptyStackException {
-        if (isEmpty()) {
-            throw new EmptyStackException();
-        }
-        return (E) elements[top];
-    }
+	@Override
+	public void clear() {
+		stack.clear();
+	}
 
-    @Override
-    public void clear() {
-        while (!isEmpty()) {
-            pop();
-        }
-    }
+	@Override
+	public boolean isEmpty() {
+		return stack.size() == 0;
+	}
 
-    @Override
-    public boolean isEmpty() {
-        return top == -1;
-    }
+	@Override
+	public Object[] toArray() {
+		Object[] newArray = new Object[stack.size()];
+		
+		for(int i = 0 ; i < stack.size(); i++ ) {
+			newArray[i] = stack.get(stack.size() - 1 - i);
+		}
+		
+		return newArray;
+	}
 
-    @Override
-    public Object[] toArray() {
-        Object[] array = new Object[top + 1];
-        System.arraycopy(elements, 0, array, 0, top + 1);
-        return array;
-    }
+	@Override
+	public E[] toArray(E[] holder) throws NullPointerException {
+		if(holder == null) throw new NullPointerException();
+		
+		if(holder.length < stack.size()) {
+			@SuppressWarnings("unchecked")
+			E[] newArray = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), stack.size());
+			for (int i = 0; i < stack.size(); i++) {
+	        	newArray[i] = stack.get(stack.size() - i - 1);
+	        }
+	        
+	        return newArray;
+		}
+				
+		for(int i = 0 ; i < stack.size() ; i++ ) {
+			holder[i] = stack.get(stack.size() - 1 - i);
+		}
+		
+		return holder;
+	}
 
-    private void resize() {
-        int newSize = elements.length * 2;
-        Object[] newArray = new Object[newSize];
-        System.arraycopy(elements, 0, newArray, 0, elements.length);
-        elements = newArray;
-    }
+	@Override
+	public boolean contains(E toFind) throws NullPointerException {
+		if(toFind == null ) throw new NullPointerException();
+		return stack.contains(toFind);
+	}
 
-    @Override
-    public E[] toArray(E[] holder) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'toArray'");
-    }
+	@Override
+	public int search(E toFind) {
+		Iterator<E> it = stack.iterator();
+		
+		for(int i = stack.size() ; i != 0; i--) {
+			if(it.next().equals(toFind)) {
+				return i;
+			}
+		}
+		return -1;
+	}
 
-    @Override
-    public boolean contains(E toFind) throws NullPointerException {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'contains'");
-    }
+	@Override
+	public Iterator<E> iterator() {
+		MyArrayList<E> newArray = new MyArrayList<>();
+		
+		Iterator<E> it = stack.iterator();
+		
+		for(int i = 0 ; i < stack.size(); i++) {
+			newArray.add(0, it.next());
+		}
+		
+		return newArray.iterator();
+	}
 
-    @Override
-    public int search(E toFind) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'search'");
-    }
+	@Override
+	public boolean equals(StackADT<E> that) {
+		if(stack.size() != that.size()) {
+			return false;
+		}
+		
+		Iterator<E> stack1 = this.iterator();
+		Iterator<E> stack2 = that.iterator();
+		
+		for(int i = 0; i < stack.size(); i++) {
+			if(!stack1.next().equals(stack2.next())) {
+				return false;
+			}
+		}
+		
+		return true;		
+	}
 
-    @Override
-    public Iterator<E> iterator() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'iterator'");
-    }
+	@Override
+	public int size() {
+		return stack.size();
+	}
 
-    @Override
-    public boolean equals(StackADT<E> that) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'equals'");
-    }
-
-    @Override
-    public int size() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'size'");
-    }
-
-    @Override
-    public boolean stackOverflow() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'stackOverflow'");
-    }
+	@Override
+	public boolean stackOverflow() {
+		return stack.size() == stack.getLength();
+	}
 }
