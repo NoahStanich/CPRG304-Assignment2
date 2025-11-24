@@ -54,16 +54,11 @@ public class MyQueue<E> implements QueueADT<E>  {
 	@Override
 	public int search(E toFind) {
 		
-		if( queue.contains(toFind)) {
-			Iterator<E> it = queue.iterator();
-			int index = 0;
-			
-			while(it.hasNext()) {
-				index++;
-				
-				if(it.next().equals(toFind)) {
-					return index;
-				}
+		Iterator<E> it = queue.iterator();
+		
+		for(int i = 1 ; i <= queue.size(); i++ ) {
+			if(it.next().equals(toFind)) {
+				return i;
 			}
 		}
 		
@@ -86,11 +81,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 		Iterator<E> queue1 = queue.iterator();
 		Iterator<E> queue2 = that.iterator();
 		
-		while(queue1.hasNext()) {
-			E item1 = queue1.next();
-			E item2 = queue2.next();
-			
-			if(!item1.equals(item2)) {
+		for(int i = 0 ; i < queue.size(); i++ ) {
+			if(!queue1.next().equals(queue2.next())) {
 				flag = false;
 				break;
 			}
@@ -101,20 +93,44 @@ public class MyQueue<E> implements QueueADT<E>  {
 		
 	@Override
 	public Object[] toArray() {
-		// TODO Auto-generated method stub
-		return null;
+		Object[] newArray = new Object[queue.size()];
+		Iterator<E> it = queue.iterator();
+		int index = 0;
+		
+		while(it.hasNext()) {
+			newArray[index] = it.next();
+			index++;
+		}
+		return newArray;
 	}
 
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
-		// TODO Auto-generated method stub
-		return null;
+		if(holder  == null) throw new NullPointerException();
+		
+		if( queue.size() > holder.length) {
+			@SuppressWarnings("unchecked")
+			E[] newArray = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), queue.size());
+			Iterator<E> it = queue.iterator();
+			for (int i = 0; i < queue.size(); i++) {
+	        	newArray[i] = it.next();
+	        }
+	        
+	        return newArray;
+		}
+		
+		Iterator<E> it = queue.iterator();
+		
+		for(int i = 0 ; i < queue.size(); i++ ) {
+			holder[i] = it.next();
+		}
+		
+		return holder;
 	}
 
 	@Override
 	public boolean isFull() {
-		// TODO Auto-generated method stub
-		return false;
+		return queue.size() == queue.getLength();
 	}
 	
 	@Override
