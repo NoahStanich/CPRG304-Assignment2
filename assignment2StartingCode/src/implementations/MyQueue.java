@@ -130,12 +130,24 @@ public class MyQueue<E> implements QueueADT<E>  {
 
 	@Override
 	public boolean isFull() {
-		return queue.size() == queue.getLength();
+		// TODO Auto-generated method stub
+		return false;
 	}
-	
+
 	@Override
 	public int size() {
-		return queue.size();
+		// TODO Auto-generated method stub
+		return 0;
 	}
+
+//	@Override
+//	public boolean isFull() {
+//		return queue.size() == queue.getLength();
+//	}
+//	
+//	@Override
+//	public int size() {
+//		return queue.size();
+//	}
 	
 }

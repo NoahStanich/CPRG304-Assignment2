@@ -125,9 +125,14 @@ public class MyStack<E> implements StackADT<E> {
 	public int size() {
 		return stack.size();
 	}
-
 	@Override
 	public boolean stackOverflow() {
-		return stack.size() == stack.getLength();
+		// TODO Auto-generated method stub
+		return false;
 	}
+
+//	@Override
+//	public boolean stackOverflow() {
+//		return stack.size() == stack.getLength();
+//	}
 }
