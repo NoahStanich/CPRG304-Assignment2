@@ -40,7 +40,11 @@ public class MyArrayList<E> implements ListADT<E>{
 		this.myList = (E[]) new Object[size];
 		
 		this.size = 0;
-	}	
+	}
+	
+	public int getLength() {
+		return myList.length;
+	}
 
 	/**
 	 * Method to get the number of elements in the array.
@@ -96,9 +100,6 @@ public class MyArrayList<E> implements ListADT<E>{
 	public boolean add(int index, E element) throws NullPointerException, IndexOutOfBoundsException {
 	    if (element == null) throw new NullPointerException("New element cannot be null.");
 	    if (index < 0 || index > size) throw new IndexOutOfBoundsException("Index out of bounds.");
-
-	    // If index is greater than size, we'll just append at the end
-	    if (index > size) index = size;
 
 	    // Resize if array is full
 	    if (size == myList.length) resize();
@@ -241,7 +242,7 @@ public class MyArrayList<E> implements ListADT<E>{
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException{
 		if(toChange == null) throw new NullPointerException();
-		if(index >= size) throw new IndexOutOfBoundsException();
+		if(index < 0 || index >= size) throw new IndexOutOfBoundsException();
 		
 		E element = myList[index];
 		
@@ -321,8 +322,7 @@ public class MyArrayList<E> implements ListADT<E>{
 		
 		if (toHold.length < size) {
 	        // Create a new array of correct runtime type
-	        E[] newArray = (E[]) java.lang.reflect.Array.newInstance(
-	                toHold.getClass().getComponentType(), size);
+	        E[] newArray = (E[]) java.lang.reflect.Array.newInstance(toHold.getClass().getComponentType(), size);
 	        for (int i = 0; i < size; i++) {
 	            newArray[i] = myList[i];
 	        }
@@ -330,6 +330,10 @@ public class MyArrayList<E> implements ListADT<E>{
 	    }
 		for(int i = 0 ; i < size ; i++ ) {
 			toHold[i] = myList[i];
+		}
+		
+		if (toHold.length > size) {
+		    toHold[size] = null;
 		}
 		
 		return toHold;
@@ -348,20 +352,7 @@ public class MyArrayList<E> implements ListADT<E>{
 		
 		// Attributes
 		private int pos = 0;
-		private E[] copyOfArray;
-		
-		
-		// Constructor
-		@SuppressWarnings("unchecked")
-		public ArrayIterator() {
 			
-			copyOfArray = (E[]) new Object[size];
-			
-			for(int i = 0 ; i < size ; i++ ) {
-				copyOfArray[i] = myList[i];
-			}
-		}
-		
 		/**
 		 * Iterator method that returns if Array has another value or not.
 		 * 
@@ -369,7 +360,7 @@ public class MyArrayList<E> implements ListADT<E>{
 		 */
 		@Override
 		public boolean hasNext() {
-			return pos < copyOfArray.length;
+			return pos < size;
 		}
 		
 		
@@ -383,7 +374,7 @@ public class MyArrayList<E> implements ListADT<E>{
 		public E next() throws NoSuchElementException {
 			if(!hasNext()) throw new NoSuchElementException();
 			
-			E element = copyOfArray[pos];
+			E element = myList[pos];
 			pos++;
 			
 			return element; 

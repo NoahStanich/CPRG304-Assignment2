@@ -36,29 +36,23 @@ public class MyDLL<E> implements ListADT<E> {
 	 */
 	public class DLLIterator implements Iterator<E>{
 		
-		// Fields
-		private E[] copyOfDLL;
-		private int pos = 0;
+		private MyDLLNode<E> curr;
 		
-		// Constructor (makes a copy of the list) 
-		@SuppressWarnings("unchecked")
 		public DLLIterator() {
-			copyOfDLL = (E[]) new Object[size];
-			copyOfDLL = toArray(copyOfDLL);
+			curr = head;
 		}
 		
 		@Override
 		public boolean hasNext() {
-			return pos < copyOfDLL.length;
+			return curr != null;
 		}
-
+		
 		@Override
 		public E next() throws NoSuchElementException {
 			if(!hasNext()) throw new NoSuchElementException();
-			
-			E element = copyOfDLL[pos];
-			pos++;
-			return element;
+			E item = curr.data;
+			curr = curr.next;
+			return item;
 		}
 		
 	}
@@ -139,7 +133,7 @@ public class MyDLL<E> implements ListADT<E> {
 	 * Method to remove first Node from DLL
 	 * @return element from the Node removed
 	 */
-	public E removeFirst() {
+	private E removeFirst() {
 		E element = head.data;
 		
 		head = head.next;
@@ -154,7 +148,7 @@ public class MyDLL<E> implements ListADT<E> {
 	 * Method to remove the last Node from the list.
 	 * @return Element deleted
 	 */
-	public E removeLast(){
+	private E removeLast(){
 		E element = tail.data;
 		
 		tail = tail.prev;
@@ -241,19 +235,16 @@ public class MyDLL<E> implements ListADT<E> {
 	 */
 	@Override
 	public boolean addAll(ListADT<? extends E> toAdd) throws NullPointerException {
-		Iterator<? extends E> it = toAdd.iterator();
-		MyDLLNode<E> curr = tail;
+		if(toAdd == null) throw new NullPointerException();
 		
+		Iterator<? extends E> it = toAdd.iterator();
+				
 		while(it.hasNext()) {
 			E element = it.next();
 			if(element == null) throw new NullPointerException();
 			
 			add(element);
-			curr = curr.next;
-		}
-		
-		tail = curr;
-		
+		}		
 		return true;
 	}
 
@@ -344,9 +335,7 @@ public class MyDLL<E> implements ListADT<E> {
 		
 		// Edge cases
 		// if list is yet empty.
-		if(size == 0) {
-			return element;
-		}
+		if(size == 0) return element;
 		
 		// if list contains just this one element.
 		if(size == 1 && head.data.equals(toRemove)) {

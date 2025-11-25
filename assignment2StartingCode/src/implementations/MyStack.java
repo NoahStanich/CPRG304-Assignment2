@@ -3,6 +3,7 @@ package implementations;
 import utilities.Iterator;
 import utilities.StackADT;
 import java.util.EmptyStackException;
+import java.util.NoSuchElementException;
 
 public class MyStack<E> implements StackADT<E> {
 	private MyArrayList<E> stack; //= new MyArrayList<>();
@@ -54,19 +55,25 @@ public class MyStack<E> implements StackADT<E> {
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
 		if(holder == null) throw new NullPointerException();
+		int size = stack.size();
 		
-		if(holder.length < stack.size()) {
+		if(holder.length < size) {
 			@SuppressWarnings("unchecked")
-			E[] newArray = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), stack.size());
-			for (int i = 0; i < stack.size(); i++) {
-	        	newArray[i] = stack.get(stack.size() - i - 1);
+			E[] newArray = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), size);
+			
+			for (int i = 0; i < size; i++) {
+	        	newArray[i] = stack.get(size - i - 1);
 	        }
 	        
 	        return newArray;
 		}
 				
-		for(int i = 0 ; i < stack.size() ; i++ ) {
-			holder[i] = stack.get(stack.size() - 1 - i);
+		for(int i = 0 ; i < size ; i++ ) {
+			holder[i] = stack.get(size - 1 - i);
+		}
+		
+		if(holder.length > size) {
+			holder[size] = null;
 		}
 		
 		return holder;
@@ -92,15 +99,23 @@ public class MyStack<E> implements StackADT<E> {
 
 	@Override
 	public Iterator<E> iterator() {
-		MyArrayList<E> newArray = new MyArrayList<>();
-		
-		Iterator<E> it = stack.iterator();
-		
-		for(int i = 0 ; i < stack.size(); i++) {
-			newArray.add(0, it.next());
-		}
-		
-		return newArray.iterator();
+		return new Iterator<E>() {
+			private int index = stack.size() - 1;
+			
+			@Override
+			public boolean hasNext() {
+				return index >= 0;
+			}
+			
+			@Override
+			public E next() throws NoSuchElementException {
+				if(!hasNext()) throw new NoSuchElementException();
+				
+				E item = stack.get(index);
+				index--;
+				return item;
+			}
+		};
 	}
 
 	@Override

@@ -52,7 +52,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	}
 	
 	@Override
-	public int search(E toFind) {
+	public int search(E toFind) throws NullPointerException{
+		if(toFind == null ) throw new NullPointerException();
 		
 		Iterator<E> it = queue.iterator();
 		
@@ -72,23 +73,19 @@ public class MyQueue<E> implements QueueADT<E>  {
 	
 	@Override
 	public boolean equals(QueueADT<E> that) {
-		if(queue.size() != that.size()) {
-			return false;
-		}
-		
-		boolean flag = true;
+		if(that == null ) return false;
+		if(queue.size() != that.size()) return false;
 		
 		Iterator<E> queue1 = queue.iterator();
 		Iterator<E> queue2 = that.iterator();
 		
 		for(int i = 0 ; i < queue.size(); i++ ) {
 			if(!queue1.next().equals(queue2.next())) {
-				flag = false;
-				break;
+				return false;
 			}
 		}
 		
-		return flag;
+		return true;
 	}
 		
 	@Override
@@ -107,12 +104,13 @@ public class MyQueue<E> implements QueueADT<E>  {
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
 		if(holder  == null) throw new NullPointerException();
+		int size = queue.size();
 		
-		if( queue.size() > holder.length) {
+		if(size > holder.length) {
 			@SuppressWarnings("unchecked")
-			E[] newArray = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), queue.size());
+			E[] newArray = (E[]) java.lang.reflect.Array.newInstance(holder.getClass().getComponentType(), size);
 			Iterator<E> it = queue.iterator();
-			for (int i = 0; i < queue.size(); i++) {
+			for (int i = 0; i < size; i++) {
 	        	newArray[i] = it.next();
 	        }
 	        
@@ -121,9 +119,11 @@ public class MyQueue<E> implements QueueADT<E>  {
 		
 		Iterator<E> it = queue.iterator();
 		
-		for(int i = 0 ; i < queue.size(); i++ ) {
+		for(int i = 0 ; i < size; i++ ) {
 			holder[i] = it.next();
 		}
+		
+		if(holder.length > size) holder[size] = null;
 		
 		return holder;
 	}
