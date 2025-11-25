@@ -1,49 +1,37 @@
-package utilities;
+package implementations;
 
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 
+import utilities.Iterator;
 import utilities.QueueADT;
 
 
 public class MyQueue<E> implements QueueADT<E>  {
 	
-	private ArrayList<E> list;
-	
+	private MyArrayList<E> list;
+	private int size = 0;
+	private boolean limit = false;
 	
 	public MyQueue() {
-		ArrayList<E> list = new ArrayList<E>();
-		clear();
+		MyArrayList<E> list = new MyArrayList<E>();
+		limit = false;
+		list.clear();
 	}
-
-	@Override
-	public void clear() {
+	
+	public MyQueue(int newSize) {
+		MyArrayList<E> list = new MyArrayList<E>();
+		size = newSize;
+		limit = true;
 		list.clear();
 	}
 	
 	@Override
-	public int size() {
-		return list.size();
-	}
-	
-	@Override
-	public boolean enqueue(E element) throws NullPointerException {
-		if (element != null) {
-			list.add(element);
-			return true;
-		}
-		
-		throw new NullPointerException();
-	}
-	
-	@Override
-	public boolean enqueueMany(ArrayList<E> arr) throws NullPointerException {
-		if (arr != null) {
-			Iterator iterator = list.iterator();
-			while(iterator.hasNext()){
-				list.add(iterator.next());
+	public void enqueue(E element) throws NullPointerException {
+		if ((list.size() != size) && (limit == true)) {
+			if (element != null) {
+				list.add(element);
 			}
-			return true;
 		}
 		throw new NullPointerException();
 	}
@@ -54,6 +42,16 @@ public class MyQueue<E> implements QueueADT<E>  {
 		list.remove(0);
 		return value;
 	}
+
+	@Override
+	public E peek() {
+		return list.get(0);
+	}
+	
+	@Override
+	public void dequeueAll() {
+		list.clear();
+	}
 	
 	@Override
 	public boolean isEmpty() {
@@ -61,8 +59,53 @@ public class MyQueue<E> implements QueueADT<E>  {
 	}
 	
 	@Override
-	public E peek() {
-		return list.get(0);
+	public boolean contains( E toFind ) throws NullPointerException {
+		Iterator<E> it = list.iterator();
+		while(it.hasNext()) {
+			  if (it.next() == toFind) return true;
+		}
+		return false;
 	}
+	
+	@Override
+	public int search( E toFind ) {
+		return 0;
+	}
+	
+	@Override
+	public Iterator<E> iterator() {
+		return list.iterator();
+	}
+	
+	@Override
+	public boolean equals( QueueADT<E> that ) {
+		return true;
+	}
+	
+	public Object[] toArray() {
+		return list.toArray();
+	}
+	
+	public E[] toArray( E[] holder ) throws NullPointerException {
+		return list.toArray(holder);
+	}
+	
+	public boolean isFull() {
+		if (!limit) return false;
+		else {
+			return (list.size() == size);
+		}
+	}
+	
+	@Override
+	public int size() {
+		return list.size();
+	}
+	
+	
+	
+
+	
+	
 	
 }
