@@ -9,18 +9,18 @@ import utilities.QueueADT;
 
 public class MyQueue<E> implements QueueADT<E>  {
 	
-	private MyArrayList<E> list;
-	private int size = 0;
+	private ArrayList<E> list = new ArrayList<E>();
+	private int size = -1;
 	private boolean limit = false;
 	
 	public MyQueue() {
-		MyArrayList<E> list = new MyArrayList<E>();
+		ArrayList<E> list = new ArrayList<E>();
 		limit = false;
 		list.clear();
 	}
 	
 	public MyQueue(int newSize) {
-		MyArrayList<E> list = new MyArrayList<E>();
+		ArrayList<E> list = new ArrayList<E>();
 		size = newSize;
 		limit = true;
 		list.clear();
@@ -28,10 +28,9 @@ public class MyQueue<E> implements QueueADT<E>  {
 	
 	@Override
 	public void enqueue(E element) throws NullPointerException {
-		if ((list.size() != size) && (limit == true)) {
-			if (element != null) {
-				list.add(element);
-			}
+		if (element != null) {
+			list.add(element);
+			return;
 		}
 		throw new NullPointerException();
 	}
@@ -60,9 +59,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	
 	@Override
 	public boolean contains( E toFind ) throws NullPointerException {
-		Iterator<E> it = list.iterator();
-		while(it.hasNext()) {
-			  if (it.next() == toFind) return true;
+		for (E i : list) {
+			  if (i == toFind) return true;
 		}
 		return false;
 	}
@@ -74,7 +72,7 @@ public class MyQueue<E> implements QueueADT<E>  {
 	
 	@Override
 	public Iterator<E> iterator() {
-		return list.iterator();
+		return (Iterator<E>) list.iterator();
 	}
 	
 	@Override
