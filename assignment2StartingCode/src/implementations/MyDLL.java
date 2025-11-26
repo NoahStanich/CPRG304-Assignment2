@@ -5,13 +5,21 @@ import java.util.NoSuchElementException;
 import utilities.Iterator;
 import utilities.ListADT;
 /**
- * Double Linked List class. Implementation of ListADT.
+ * Double Linked List class.
+ * 
+ * @author Oleksandr (Sasha) Maksymenko, Chukwudumebi (Max) Anaruagu, Noah Stanich, Jude (Rei) Uyeno
+ * @version 1.0
+ * 
+ * Implementation of ListADT.
  * Creates and manages Double Linked List
  * @param <E> - type of data stored in the list.
  */
 public class MyDLL<E> implements ListADT<E> {
 
-	// Inner Single Node Class
+	/**
+	 * Inner Single Node Class
+	 * @param <E> Data type.
+	 */
 	@SuppressWarnings("hiding")
 	public class MyDLLNode<E> {
 		
@@ -20,12 +28,17 @@ public class MyDLL<E> implements ListADT<E> {
 		private MyDLLNode<E> next;
 		private MyDLLNode<E> prev;
 		
-		// Parameterless constructor
+		/**
+		 * Parameterless constructor
+		 */
 		public MyDLLNode() {
 			
 		}
 		
-		// Constructor with a parameter
+		/**
+		 * Constructor with a parameter
+		 * @param element First element in the DLL
+		 */
 		public MyDLLNode(E element) {
 			this.data = element;
 		}
@@ -38,6 +51,9 @@ public class MyDLL<E> implements ListADT<E> {
 		
 		private MyDLLNode<E> curr;
 		
+		/**
+		 * Constructor.
+		 */
 		public DLLIterator() {
 			curr = head;
 		}
@@ -61,21 +77,18 @@ public class MyDLL<E> implements ListADT<E> {
 	private MyDLLNode<E> head;
 	private MyDLLNode<E> tail;
 	private int size = 0;
-	
-	public MyDLLNode<E> getHead(){
-		return head;
-	}
-	
-	public MyDLLNode<E> getTail(){
-		return tail;
-	}
-	
-	// Parameterless constructor
+
+	/**
+	 * Parameterless constructor
+	 */
 	public MyDLL() {
 		
 	}
 	
-	//Constructor with parameter
+	/**
+	 * Constructor with parameter
+	 * @param element First element in the DLL.
+	 */
 	public MyDLL(E element){
 		createFirst(element);
 	}
@@ -164,7 +177,7 @@ public class MyDLL<E> implements ListADT<E> {
 	 * Method that allows to insert an element to a certain index in the list.
 	 * @param index where the element should be inserted
 	 * @param toAdd element to be inserted in the list
-	 * @returns true if successful
+	 * @return true if successful
 	 * @throws NullPointerException if element passed is null.
 	 */
 	@Override
@@ -252,7 +265,7 @@ public class MyDLL<E> implements ListADT<E> {
 	 * Method to retrieve an element based on it's index (without deleting it).
 	 * @param index of the Node containing data.
 	 * @return element of the node at the index specified.
-	 * @throws IndexOutOfBoundsException if index provided is out of range <code>index < 0 || index >= size</code>
+	 * @throws IndexOutOfBoundsException if index provided is out of range <code>index &lt; 0 || index &gt;= size</code>
 	 */
 	@Override
 	public E get(int index) throws IndexOutOfBoundsException {
@@ -278,7 +291,7 @@ public class MyDLL<E> implements ListADT<E> {
 	/**
 	 * Method to remove a Node from the List based on it's index
 	 * @param index of the Node that needs to be deleted
-	 * @throws IndexOutOfBoundsException if <code>index < 0 || index >= size</code>
+	 * @throws IndexOutOfBoundsException if <code>index &lt; 0 || index &gt;= size</code>
 	 * @return data from the deleted Node.
 	 */
 	@Override
@@ -383,7 +396,7 @@ public class MyDLL<E> implements ListADT<E> {
 	 * @param index The index of the Node who's data has to be changed.
 	 * @param toChange new data for the Node
 	 * @throws NullPointerException if the toChange data element is null
-	 * @throws IndexOutOfBoundsException if index specified is out of range <code>index < 0 || index >= size</code>
+	 * @throws IndexOutOfBoundsException if index specified is out of range <code>index &lt; 0 || index &gt;= size</code>
 	 * @return Data that was previously stored in the Node
 	 */
 	@Override
