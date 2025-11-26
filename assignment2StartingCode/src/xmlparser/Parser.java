@@ -1,20 +1,5 @@
-//<?xml version="1.0" encoding="UTF-8"?>
-//<Test>
-//  <case id="1">
-//    <domain>Java</domain>
-//    <count>39</count>
-//  </case>
-//
-//  <case id="2">
-//    <domain>C/C++</domain>
-//    <count>45</count>
-//  </case>
-//</Test>
-
 package xmlparser;
 
-//import javax.xml.stream.XMLInputFactory;
-//import javax.xml.stream.XMLStreamReader;
 import implementations.MyStack;
 import implementations.MyQueue;
 import java.nio.file.Files;
@@ -58,11 +43,6 @@ public class Parser {
 					allMatches.set(i, '|' + allMatches.get(i));
 				}
 			}
-			/*
-			for (String i : allMatches) {
-				System.out.println(i);
-			}
-			*/
 
 
 			// Iterates through all tags
