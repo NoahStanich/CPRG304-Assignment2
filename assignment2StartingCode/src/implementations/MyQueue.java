@@ -4,7 +4,14 @@ import exceptions.EmptyQueueException;
 import utilities.Iterator;
 import utilities.QueueADT;
 
-
+/**
+ * Custom implementation of Queue - linear data structure list.
+ * 
+ * @author Oleksandr (Sasha) Maksymenko, Chukwudumebi (Max) Anaruagu, Noah Stanich, Jude (Rei) Uyeno
+ * @version 1.0
+ * 
+ * @param <E> Data type.
+ */
 public class MyQueue<E> implements QueueADT<E>  {
 	
 	private MyArrayList<E> queue;
@@ -12,8 +19,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	/**
 	 * Parameterless Constructor
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Object created.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Object created.</p>
 	 **/
 	public MyQueue() {
 		this.queue = new MyArrayList<E>();  
@@ -26,8 +33,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * 
 	 * @throws NullPointerException if the element passed is null.
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>The element inserted first into the queue<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>The element inserted first into the queue</p>
 	 */
 	@Override
 	public void enqueue(E element) throws NullPointerException {
@@ -42,8 +49,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * @throws EmptyQueueException if the queue is empty
 	 * 
 	 * @return an element that was deleted.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Removed the first element from the queue<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Removed the first element from the queue</p>
 	 */
 	@Override
 	public E dequeue() throws EmptyQueueException {
@@ -58,8 +65,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * @throws EmptyQueueException if the queue is empty
 	 * 
 	 * @return the first element in the queue
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns the first element in the queue<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns the first element in the queue</p>
 	 */
 	@Override
 	public E peek() throws EmptyQueueException {
@@ -70,8 +77,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	
 	/**
 	 * Removes all items from the queue
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>All items removed from the queue<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>All items removed from the queue</p>
 	 */
 	@Override
 	public void dequeueAll() {
@@ -81,8 +88,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * Checks to see if the queue is empty
 	 * 
 	 * @return returns true if the queue is empty
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if the queue is empty<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if the queue is empty</p>
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -95,8 +102,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * @throws NullPointerException if the element is null
 	 * 
 	 * @return returns true if the queue contains the element
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if the queue contains the element<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if the queue contains the element</p>
 	 */
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
@@ -111,8 +118,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * @throws NullPointerException if the element is null
 	 * 
 	 * @return returns the index where the item is in the queue
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns the index where the item is in the queue<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns the index where the item is in the queue</p>
 	 */
 	@Override
 	public int search(E toFind) throws NullPointerException{
@@ -133,8 +140,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * Returns an iterator over the elements in this queue in proper sequence.
 	 * 
 	 * @return an iterator over the elements in this queue in proper sequence.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns an iterator over the elements in this queue in proper sequence.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns an iterator over the elements in this queue in proper sequence.</p>
 	 */
 	@Override
 	public Iterator<E> iterator() {
@@ -145,8 +152,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * Checks if two queues are equal to eachother
 	 * 
 	 * @return returns true if the queues are equal to each other
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if the queues are equal to each other<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if the queues are equal to each other</p>
 	 */
 	@Override
 	public boolean equals(QueueADT<E> that) {
@@ -169,8 +176,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * Converts the queue into an array form
 	 * 
 	 * @return an array containing the elements of this queue.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns an array containing the elements of this queue.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns an array containing the elements of this queue.</p>
 	 */
 	@Override
 	public Object[] toArray() {
@@ -189,11 +196,11 @@ public class MyQueue<E> implements QueueADT<E>  {
 	/**
 	 * Converts the queue into an array form, putting it inside of an array given
 	 * 
-	 * @param Passes an array for items to be put through
+	 * @param holder Passes an array for items to be put through
 	 * @return an array containing the elements of this queue.
 	 * @throws NullPointerException if the specified array is null.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns an array containing the elements of this queue.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns an array containing the elements of this queue.</p>
 	 */
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
@@ -227,8 +234,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * Only applies if there is a limit
 	 * 
 	 * @return true if queue is at capacity.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if queue is at capacity.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if queue is at capacity.</p>
 	 */
 	@Override
 	public boolean isFull() {
@@ -239,8 +246,8 @@ public class MyQueue<E> implements QueueADT<E>  {
 	 * Gets the size of the queue
 	 * 
 	 * @return returns the size of the queue
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns the size of the queue.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns the size of the queue.</p>
 	 */
 	@Override
 	public int size() {

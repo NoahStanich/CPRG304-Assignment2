@@ -6,6 +6,13 @@ import java.util.NoSuchElementException;
 import utilities.Iterator;
 import utilities.ListADT;
 
+/**
+ * Custom implementation of ArrayList - linear data structure.
+ * 
+ * @author Oleksandr (Sasha) Maksymenko, Chukwudumebi (Max) Anaruagu, Noah Stanich, Jude (Rei) Uyeno
+ * @version 1.0
+ * @param <E> Data type.
+ */
 public class MyArrayList<E> implements ListADT<E>{
 
 	private E[] myList;
@@ -16,8 +23,8 @@ public class MyArrayList<E> implements ListADT<E>{
 	/**
 	 * Parameterless Constructor
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Object created.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Object created.</p>
 	 */
 	@SuppressWarnings("unchecked")
 	public MyArrayList() {
@@ -30,8 +37,8 @@ public class MyArrayList<E> implements ListADT<E>{
 	 * 
 	 * @param size the initial length of an array.
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Object created.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Object created.</p>
 	 */
 	@SuppressWarnings("unchecked")
 	public MyArrayList(int size) {
@@ -42,6 +49,10 @@ public class MyArrayList<E> implements ListADT<E>{
 		this.size = 0;
 	}
 	
+	/**
+	 * getter for length of the list.
+	 * @return length of the list.
+	 */
 	public int getLength() {
 		return myList.length;
 	}
@@ -93,8 +104,8 @@ public class MyArrayList<E> implements ListADT<E>{
 	 * 
 	 * @return true if element is successfully added.
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>The element inserted to the specified index in the list.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>The element inserted to the specified index in the list.</p>
 	 */
 	@Override
 	public boolean add(int index, E element) throws NullPointerException, IndexOutOfBoundsException {
@@ -125,8 +136,8 @@ public class MyArrayList<E> implements ListADT<E>{
 	 * 
 	 * @return true if element successfully added to the list.
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b> Element added to the end of the list.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b> Element added to the end of the list.</p>
 	 */
 	
 	@Override
@@ -237,7 +248,7 @@ public class MyArrayList<E> implements ListADT<E>{
 	 * @param toChange Element to be stored at the specified position.
 	 * @return The element previously at the specified position.
 	 * @throws NullPointerException if element passed is null
-	 * @throws IndexOutOfBoundsException 
+	 * @throws IndexOutOfBoundsException if index passed is out of range.
 	 */
 	@Override
 	public E set(int index, E toChange) throws NullPointerException, IndexOutOfBoundsException{
@@ -368,7 +379,7 @@ public class MyArrayList<E> implements ListADT<E>{
 		 * Iterator method that returns next element in the list.
 		 * 
 		 * @return E element (next in the list)
-		 * @throws NoSuchElementExcpetion if there is no more values in the array.
+		 * @throws NoSuchElementException if there is no more values in the array.
 		 */
 		@Override
 		public E next() throws NoSuchElementException {

@@ -5,14 +5,22 @@ import utilities.StackADT;
 import java.util.EmptyStackException;
 import java.util.NoSuchElementException;
 
+/**
+ * Custom implementation of Stack - linear data structure list.
+ * 
+ * @author Oleksandr (Sasha) Maksymenko, Chukwudumebi (Max) Anaruagu, Noah Stanich, Jude (Rei) Uyeno
+ * @version 1.0
+ * 
+ * @param <E> Data type.
+ */
 public class MyStack<E> implements StackADT<E> {
-	private MyArrayList<E> stack; //= new MyArrayList<>();
+	private MyArrayList<E> stack;
 
 	/**
 	 * Parameterless Constructor
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Object created.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Object created.</p>
 	 **/
 	public MyStack() {
 		stack = new MyArrayList<>();
@@ -21,12 +29,12 @@ public class MyStack<E> implements StackADT<E> {
 	/**
 	 * Method to add a new element to the front of the stack
 	 * 
-	 * @param element that will be inserted into the stack.
+	 * @param toAdd Element that will be inserted into the stack.
 	 * 
 	 * @throws NullPointerException if the element passed is null.
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>The element has been inserted last on the stack<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>The element has been inserted last on the stack</p>
 	 */
 	@Override
 	public void push(E toAdd) throws NullPointerException {
@@ -41,8 +49,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * @throws EmptyStackException if the stack is empty
 	 * @return element that was last on the stack
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns and removes the element that was last on the stack<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns and removes the element that was last on the stack</p>
 	 */
 	@Override
 	public E pop() throws EmptyStackException {
@@ -56,8 +64,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * @throws EmptyStackException if the stack is empty
 	 * @return element that was last on the stack
 	 * 
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns the element that was last on the stack<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns the element that was last on the stack</p>
 	 */
 	@Override
 	public E peek() throws EmptyStackException {
@@ -68,8 +76,8 @@ public class MyStack<E> implements StackADT<E> {
 	
 	/**
 	 * Removes all items from the stack
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>All items removed from the stack<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>All items removed from the stack</p>
 	 */
 	@Override
 	public void clear() {
@@ -80,8 +88,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Checks to see if the stack is empty
 	 * 
 	 * @return returns true if the stack is empty
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if the stack is empty<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if the stack is empty</p>
 	 */
 	@Override
 	public boolean isEmpty() {
@@ -92,8 +100,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Converts the stack into an array form
 	 * 
 	 * @return an array containing the elements of this stack.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns an array containing the elements of this stack.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns an array containing the elements of this stack.</p>
 	 */
 	@Override
 	public Object[] toArray() {
@@ -109,11 +117,11 @@ public class MyStack<E> implements StackADT<E> {
 	/**
 	 * Converts the stack into an array form, putting it inside of an array given
 	 * 
-	 * @param Passes an array for items to be put through
+	 * @param holder Passes an array for items to be put through
 	 * @return an array containing the elements of this stack.
 	 * @throws NullPointerException if the specified array is null.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns an array containing the elements of this stack.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns an array containing the elements of this stack.</p>
 	 */
 	@Override
 	public E[] toArray(E[] holder) throws NullPointerException {
@@ -148,8 +156,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * @throws NullPointerException if the element is null
 	 * 
 	 * @return returns true if the stack contains the element
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if the stack contains the element<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if the stack contains the element</p>
 	 */
 	@Override
 	public boolean contains(E toFind) throws NullPointerException {
@@ -163,8 +171,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * @throws NullPointerException if the element is null
 	 * 
 	 * @return returns the index where the item is in the stack
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns the index where the item is in the stack<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns the index where the item is in the stack</p>
 	 */
 	@Override
 	public int search(E toFind) {
@@ -182,8 +190,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Returns an iterator over the elements in this stack in proper sequence.
 	 * 
 	 * @return an iterator over the elements in this stack in proper sequence.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns an iterator over the elements in this stack in proper sequence.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns an iterator over the elements in this stack in proper sequence.</p>
 	 */
 	@Override
 	public Iterator<E> iterator() {
@@ -210,8 +218,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Checks if two stacks are equal to eachother
 	 * 
 	 * @return returns true if the stacks are equal to each other
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if the stacks are equal to each other<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if the stacks are equal to each other</p>
 	 */
 	@Override
 	public boolean equals(StackADT<E> that) {
@@ -235,8 +243,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Gets the size of the stack
 	 * 
 	 * @return returns the size of the stack
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns the size of the stack.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns the size of the stack.</p>
 	 */
 	@Override
 	public int size() {
@@ -249,8 +257,8 @@ public class MyStack<E> implements StackADT<E> {
 	 * Only applies if there is a limit
 	 * 
 	 * @return true if stack is at capacity.
-	 * <b><p>Precondition:<b>none.<p>
-	 * <b><p>Postcondition:<b>Returns true if stack is at capacity.<p>
+	 * <p><b>Precondition:</b>none.</p>
+	 * <p><b>Postcondition:</b>Returns true if stack is at capacity.</p>
 	 */
 	@Override
 	public boolean stackOverflow() {
